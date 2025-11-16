@@ -46,41 +46,43 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
+      <View style={styles.authContainer}>
+        <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Type your name"
-        placeholderTextColor="#888"
-        onChangeText={setName}
-        value={name}
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Type your nim"
-        placeholderTextColor="#888"
-        onChangeText={setNim}
-        value={nim}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Type your password"
-        placeholderTextColor="#888"
-        onChangeText={setPassword}
-        value={password}
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Type your name"
+          placeholderTextColor="#888"
+          onChangeText={setName}
+          value={name}
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Type your nim"
+          placeholderTextColor="#888"
+          onChangeText={setNim}
+          value={nim}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Type your password"
+          placeholderTextColor="#888"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry
+        />
 
-      <Button
-        label={isLogin ? 'Login' : 'Create Account'}
-        onPress={handleSubmit}
-      />
+        <Button
+          label={isLogin ? 'Login' : 'Create Account'}
+          onPress={handleSubmit}
+        />
 
-      <Button
-        label={isLogin ? 'Need an account? Register' : 'Have an account? Login'}
-        onPress={toggleForm}
-      />
+        <Button
+          label={isLogin ? 'Need an account? Register' : 'Have an account? Login'}
+          onPress={toggleForm}
+        />
+      </View>
     </View>
   );
 }
@@ -88,10 +90,19 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+  },
+  authContainer: {
+    width: 400,
+    height: 500,
     backgroundColor: '#25292e',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    borderRadius: 5,
   },
   title: {
     fontSize: 32,
