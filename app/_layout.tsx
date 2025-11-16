@@ -1,37 +1,42 @@
-import { SessionProvider } from '@/context';
-import { Slot } from 'expo-router';
+import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-// Import your global CSS file
-import '../global.css';
+import { Drawer } from 'expo-router/drawer';
 
 /**
- * Root Layout is the highest-level layout in the app, wrapping all other layouts and screens.
- * It provides:
- * 1. Global authentication context via SessionProvider
- * 2. Gesture handling support for the entire app
- * 3. Global styles and configurations
- *
- * This layout affects every screen in the app, including both authenticated
- * and unauthenticated routes.
+ * DrawerLayout implements the root drawer navigation for the app.
+ * This layout wraps the tab navigation and other screens accessible via the drawer menu.
  */
-export default function Root() {
-  // Set up the auth context and render our layout inside of it.
+const DrawerLayout = () => {
   return (
-    <SessionProvider>
-      {/*
-        GestureHandlerRootView is required for:
-        - Drawer navigation gestures
-        - Swipe gestures
-        - Other gesture-based interactions
-        Must wrap the entire app to function properly
-      */}
-      <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer>
         {/*
-          Slot renders child routes dynamically
-          This includes both (app) and (auth) group routes
+          (tabs) route contains the TabLayout with bottom navigation
+          - Nested inside the drawer as the main content
+          - headerShown: false removes double headers (drawer + tabs)
         */}
-        <Slot />
-      </GestureHandlerRootView>
-    </SessionProvider>
+        <Drawer.Screen
+          name="(tabs)"
+          options={{
+            drawerLabel: 'Home',
+            headerShown: false,
+          }}
+        />
+        {/*
+          Additional drawer routes can be added here
+          - Each represents a screen accessible via the drawer menu
+          - Will use the drawer header by default
+        */}
+        <Drawer.Screen
+          name="profile"
+          options={{
+            drawerLabel: 'Profile', // Label shown in drawer menu
+            title: 'Profile', // Header title when screen is open
+          }}
+        />
+      </Drawer>
+    </GestureHandlerRootView>
   );
-}
+};
+
+export default DrawerLayout;

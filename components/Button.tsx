@@ -3,13 +3,28 @@ import { StyleSheet, View, Pressable, Text } from 'react-native';
 type Props = {
   label: string;
   onPress: () => void;
-}
+  variant?: 'primary' | 'secondary';
+};
 
-export default function Button({ label, onPress }: Props) {
+export default function Button({ label, onPress, variant = 'primary' }: Props) {
   return (
-    <View >
-      <Pressable style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonLabel}>{label}</Text>
+    <View style={styles.buttonContainer}>
+      <Pressable
+        style={({ pressed }) => [
+          styles.button,
+          variant === 'secondary' && styles.secondaryButton,
+          pressed && styles.buttonPressed,
+        ]}
+        onPress={onPress}
+      >
+        <Text
+          style={[
+            styles.buttonLabel,
+            variant === 'secondary' && styles.secondaryButtonLabel,
+          ]}
+        >
+          {label}
+        </Text>
       </Pressable>
     </View>
   );
@@ -32,18 +47,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
-
+    backgroundColor: '#2563EB',
+  },
+  buttonPressed: {
+    opacity: 0.8,
   },
   buttonLabel: {
-    color: '#fff',
+    color: '#FFFFFF',
     fontSize: 16,
-    textDecorationLine: 'underline',
+    fontWeight: '600',
   },
   secondaryButton: {
     backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
   },
   secondaryButtonLabel: {
-    color: '#aaa',
+    color: '#6B7280',
     fontSize: 16,
   },
 });
